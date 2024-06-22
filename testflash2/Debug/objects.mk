@@ -5,5 +5,5 @@
 
 USER_OBJS :=
 
-LIBS := -lFreeRTOS
+LIBS := -lFreeRTOS -lfreertos
 
