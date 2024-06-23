@@ -49,14 +49,17 @@
 /* USER CODE BEGIN PV */
 typedef struct {
 	uint32_t accion;
-	uint32_t nroUsusario;
+	uint32_t nroUsuario;
 	uint32_t clave;
 	uint32_t nroIntentos;
-} usuario;
+}usuario;
 
-QueueHandle_t cmd;
-QueueHandle_t data;
+typedef enum{
+	READ,
+	WRITE
+}accion_e;
 
+QueueHandle_t cmd = NULL, data = NULL;
 
 uint32_t buffer[FLASH_BUFFER_SIZE];
 uint32_t datos[4];
@@ -66,40 +69,55 @@ uint32_t datos[4];
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+
+static void dummyDataMemoryRecording(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static void dummyDataMemoryRecording (void){
+	uint32_t bufferAux[FLASH_BUFFER_SIZE];
+	for(int i = 0; i < FLASH_BUFFER_SIZE; i++){
+	  bufferAux[i] = i;
+	}
+	Flash_Write_Data(PAGE_ADDR_1, bufferAux, FLASH_BUFFER_SIZE);
+}
 
 static void t_flashtask(void *pvParameters){
 
 	uint32_t aux_ADDR=PAGE_ADDR_1;
-	uint32_t index=0;
+	uint32_t index = 0;
 	usuario value;
 	//flashdata response;
 
+	uint32_t buffer2[FLASH_BUFFER_SIZE];
+
 	while(1){
 		xQueueReceive(cmd, &value, portMAX_DELAY);
+
 		switch(value.accion){
 
-		case 1:		//lectura de un valor en particular
-			//aux_ADDR = PAGE_ADDR_1 + value.nroUsusario * 2;
-			index=(2*value.nroUsusario)+1;
-			Flash_Read_Data(aux_ADDR, buffer, FLASH_BUFFER_SIZE); //cambiar a 5 el numero de palabras en caso que se desee cambiar por datos en char
+		case READ:		//lectura de un valor en particular
+			//aux_ADDR = PAGE_ADDR_1 + value.nroUsuario * 2;
+			index = (2 * (value.nroUsuario)) + 1;
+			Flash_Read_Data(aux_ADDR, buffer2, FLASH_BUFFER_SIZE); //cambiar a 5 el numero de palabras en caso que se desee cambiar por datos en char
 
 			//response.id = (uint8_t)buffer[0];
 
-			value.clave = buffer[index];
+			value.clave = buffer2[index];
 
 			xQueueSend(data,&value,portMAX_DELAY);
+
 			break;
-		case 2:		//escritura de un codigo nuevo en la memoria
+		case WRITE:		//escritura de un codigo nuevo en la memoria
 			Flash_Read_Data(PAGE_ADDR_1, buffer, FLASH_BUFFER_SIZE);
-			buffer[value.nroUsusario*2]=value.nroUsusario;
-			buffer[value.nroUsusario*2+1]=value.clave;
+			buffer[value.nroUsuario*2]=value.nroUsuario;
+			buffer[value.nroUsuario*2+1]=value.clave;
 			Flash_Write_Data(PAGE_ADDR_1, buffer, FLASH_BUFFER_SIZE);
+			break;
+		default:
 			break;
 
 		}
@@ -109,24 +127,25 @@ static void t_flashtask(void *pvParameters){
 
 static void auxtask(void *pvParameters){
 	usuario a;
-	a.nroUsusario=0;
-	uint8_t i;
-	//a.clave=9999;
-	//a.nroIntentos=0;
+	a.nroUsuario=0;
+	uint8_t i = 0;
+	a.clave=9999;
+	a.nroIntentos=0;
 	while(1){
 		/*a.accion=2;
 		xQueueSendToBack(flash_cmd_queue, &a, portMAX_DELAY);
 		//vTaskDelay(5);*/
-		a.accion=1;
-		for(i=0;i<4;i++){
 
-		xQueueSend(cmd, &a, portMAX_DELAY);
-		//taskYIELD();
-		vTaskDelay(5/portTICK_PERIOD_MS);
-		xQueueReceive(data, &a, portMAX_DELAY);
-		a.nroUsusario++;
+		for(i=0 ; i<4 ; i++){
+			a.accion = READ;
+			xQueueSend(cmd, &a, portMAX_DELAY);
+			//vTaskDelay(5/portTICK_PERIOD_MS);
+			xQueueReceive(data, &a, portMAX_DELAY);
+			if(a.nroUsuario < 4) a.nroUsuario++;
+			else a.nroUsuario = 0;
 
-		vTaskDelay(5/portTICK_PERIOD_MS);
+
+			vTaskDelay(5/portTICK_PERIOD_MS);
 		}
 	}
 }
@@ -140,7 +159,6 @@ static void auxtask(void *pvParameters){
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -163,12 +181,13 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
+  dummyDataMemoryRecording();	//Funcion para grabar datos de prueba en memoria. Graba 0 1 2 3 4...
 
   cmd = xQueueCreate(1,sizeof(usuario));
-    data = xQueueCreate(1,sizeof(usuario));
+  data = xQueueCreate(1,sizeof(usuario));
 
-    xTaskCreate(t_flashtask, "", 256, NULL, 2, NULL);
-    xTaskCreate(auxtask, "", 256, NULL, 1, NULL);
+  xTaskCreate(t_flashtask, "", 256, NULL, tskIDLE_PRIORITY + 2, NULL);
+  xTaskCreate(auxtask, "", 256, NULL, tskIDLE_PRIORITY + 1, NULL);
 
     vTaskStartScheduler();
 
@@ -176,12 +195,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+
   /* USER CODE END 3 */
 }
 

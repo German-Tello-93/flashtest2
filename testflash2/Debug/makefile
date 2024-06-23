@@ -61,8 +61,8 @@ all: main-build
 main-build: testflash2.elf secondary-outputs
 
 # Tool invocations
-testflash2.elf: $(OBJS) $(USER_OBJS) C:\Users\germa\STM32CubeIDE\workspace_1.6.1\testflash2\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "testflash2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\germa\STM32CubeIDE\workspace_1.6.1\testflash2\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="testflash2.map" -Wl,--gc-sections -static -Wl,--start-group -lFreeRTOS -Wl,--end-group -L"C:\Users\germa\STM32CubeIDE\workspace_1.6.1\FreeRTOS\Debug" --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+testflash2.elf: $(OBJS) $(USER_OBJS) C:\Users\Alan\Documents\GIT_propios\stm32_workspace\flashtest2\testflash2\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "testflash2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Alan\Documents\GIT_propios\stm32_workspace\flashtest2\testflash2\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="testflash2.map" -Wl,--gc-sections -static -Wl,--start-group -lFreeRTOS -lfreertos -Wl,--end-group -L"C:\Users\Alan\Documents\GIT_propios\stm32_workspace\freertos\Debug" --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

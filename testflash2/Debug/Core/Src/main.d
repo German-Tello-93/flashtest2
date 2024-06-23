@@ -24,17 +24,17 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Core/Inc/FlASH_PAGE_F1.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/FreeRTOS.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/FreeRTOSConfig.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/projdefs.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/portable.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/deprecated_definitions.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/portmacro.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/mpu_wrappers.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/task.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/list.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/queue.h \
- C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/task.h
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/FreeRTOS.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/FreeRTOSConfig.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/projdefs.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/portable.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/deprecated_definitions.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/portmacro.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/mpu_wrappers.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/task.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/list.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/queue.h \
+ C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/task.h
 
 ../Core/Inc/main.h:
 
@@ -88,24 +88,24 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/FlASH_PAGE_F1.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/FreeRTOS.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/FreeRTOS.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/FreeRTOSConfig.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/FreeRTOSConfig.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/projdefs.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/projdefs.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/portable.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/portable.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/deprecated_definitions.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/deprecated_definitions.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/portmacro.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/portmacro.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/mpu_wrappers.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/mpu_wrappers.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/task.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/task.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/list.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/list.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/queue.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/queue.h:
 
-C:/Users/germa/STM32CubeIDE/workspace_1.6.1/FreeRTOS/Inc/task.h:
+C:/Users/Alan/Documents/GIT_propios/stm32_workspace/freertos/Inc/task.h:
